@@ -87,7 +87,7 @@ const TabView = async () => ({
     make.left.right.inset(0)
   },
   events: {
-    didSelect: function(indexPath) {
+    didSelect: function(sender, indexPath) {
       router.switch(indexPath.row)
     }
   }
