@@ -3,7 +3,7 @@ const Settings = async () => ({
   props: {
     id: "Text",
     hidden: true,
-    text: "Hello, World!\n\nThis is a demo for Text View in JSBox extension!\n\nCurrently we don't support attributed string in iOS.\n\nYou can try html! Looks pretty cool."
+    text: "Coming soon"
   },
   layout: $layout.fill
 })
