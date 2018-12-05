@@ -1,5 +1,6 @@
 {
   "scripts": {
+    "build": "parcel build ./ClassViewer/main.js --target node",
     "format": "eslint \"**/*.js\" --fix && prettier \"**/*.{js,ts,json,md}\" --write"
   },
   "devDependencies": {
