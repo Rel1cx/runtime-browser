@@ -32,8 +32,8 @@ const ItemList = ({ items, layout = $layout.fill }) => ({
   events: {
     didSelect: function(sender, indexPath, data) {
       const methods = $objc(data.label.text).$__methodDescription()
-      renderCode(methods.rawValue().toString())
       router.switch(0)
+      renderCode(methods.rawValue().toString())
     }
   }
 })

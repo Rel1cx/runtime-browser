@@ -2,7 +2,7 @@ const CodeView = () => ({
   type: "web",
   props: {
     id: "CodeView",
-    style: "pre{white-space:pre-wrap;white-space:-pre-wrap;word-wrap:break-word;}"
+    style: `pre, code{white-space:pre-wrap;white-space:-pre-wrap;word-wrap:break-word;}`
   },
   layout(make, view) {
     const pre = view.prev
