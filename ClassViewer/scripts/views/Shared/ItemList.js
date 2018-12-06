@@ -18,9 +18,9 @@ const ItemList = ({ items, layout = $layout.fill }) => ({
           type: "label",
           props: {
             id: "label",
+            align: $align.center,
             bgcolor: $color("#fff"),
             textColor: $color("#555"),
-            align: $align.center,
             font: $font("iosevka", 18)
           },
           layout: $layout.fill
