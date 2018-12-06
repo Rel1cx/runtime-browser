@@ -1,16 +1,19 @@
-const getHTML = (code) =>
-  `<html><meta name="viewport" content="user-scalable=no" /><link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/styles/agate.min.css'><style>*{margin:0;padding:0;}pre{font-size:18px;}</style><script src='https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/highlight.min.js'></script><script>hljs.initHighlightingOnLoad();</script><body class='hljs'><pre><code class='hljs'>${code}</code></pre></body></html>`
-
-function renderCode(text) {
-  if (!text) {
-    return
+const getHTML = (code) => {
+  if (!/^<NSObject: 0x\w+>/.test(code)) {
+    code = code.replace(/in NSObject:[\s\S]*/gm, "in NSObject:\n...")
   }
-  const code = text
+  const entity = code
     .replace(/[\u00A0-\u9999<>&]/gim, (i) => `&#${i.charCodeAt(0)};`)
     .replace(/\t/g, "  ")
     .replace(/\s\(0x\w+\)/g, "")
     .replace(/(\nin[^\n]+?:)/g, "\n\n$1")
-  $("CodeView").html = getHTML(code)
+  return `<html><meta name="viewport" content="user-scalable=no"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/styles/tomorrow.min.css"><style>*{margin:0;padding:0}code,pre{white-space:-pre-wrap;white-space:pre-wrap;word-wrap:break-word;font-size:18px;font-family:menlo!important;line-height:24px}</style><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/highlight.min.js"></script><script>hljs.initHighlightingOnLoad()</script><body class="hljs"><pre><code class="hljs">${entity}</code></pre></body></html>`
+}
+function renderCode(text) {
+  if (!text) {
+    return
+  }
+  $("CodeView").html = getHTML(text)
 }
 
 async function getInputHistory() {
@@ -27,8 +30,7 @@ async function setInputHistory(className) {
     key: "history",
     value: [className, ...items]
   })
-  console.log(res)
-  $("ItemList").data = res
+  return res
 }
 
 module.exports = {

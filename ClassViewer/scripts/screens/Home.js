@@ -1,7 +1,7 @@
 const InputView = require("../views/Home/Input")
 const CodeView = require("../views/Home/Code")
 
-const MainScreen = async () => ({
+const HomeScreen = async () => ({
   props: {
     type: "view",
     id: "Home",
@@ -16,4 +16,4 @@ const MainScreen = async () => ({
   }
 })
 
-module.exports = MainScreen
+module.exports = HomeScreen

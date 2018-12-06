@@ -1,9 +1,10 @@
 const Settings = async () => ({
-  type: "text",
+  type: "label",
   props: {
-    id: "Text",
+    id: "Settings",
     hidden: true,
-    text: "Coming soon"
+    textAlign: $align.center,
+    text: "not supported yet"
   },
   layout: $layout.fill
 })

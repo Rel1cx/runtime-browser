@@ -8,7 +8,7 @@ const InputView = () => ({
     placeholder: $l10n("input")
   },
   layout(make) {
-    make.height.equalTo(30)
+    make.height.equalTo(32)
     make.left.top.right.inset(5)
   },
   events: {

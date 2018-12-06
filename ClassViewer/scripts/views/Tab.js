@@ -41,7 +41,7 @@ const TabView = async () => ({
     data: [
       {
         menu_image: {
-          icon: $icon("067", $color("clear"), $size(72, 72)),
+          icon: $icon("102", $color("clear"), $size(72, 72)),
           tintColor: $color("tint")
         },
         menu_label: {

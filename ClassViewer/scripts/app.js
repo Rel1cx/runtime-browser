@@ -8,7 +8,10 @@ const RouterView = async (views) => ({
     id: "routerView"
   },
   views: await Promise.all(views),
-  layout: $layout.fill,
+  layout(make) {
+    make.left.top.right.inset(0)
+    make.bottom.inset(40)
+  },
   events: {}
 })
 
