@@ -26,11 +26,16 @@ async function setInputHistory(className) {
   if (items.find((x) => x === className)) {
     return
   }
-  const res = await $cache.setAsync({
+  const newData = [className, ...items]
+  $cache.setAsync({
     key: "history",
-    value: [className, ...items]
+    value: newData
   })
-  return res
+  $("ItemList").data = newData.map((item) => ({
+    label: {
+      text: item
+    }
+  }))
 }
 
 module.exports = {

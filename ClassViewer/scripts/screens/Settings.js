@@ -1,10 +1,7 @@
 const Settings = async () => ({
-  type: "label",
+  type: "markdown",
   props: {
-    id: "Settings",
-    hidden: true,
-    textAlign: $align.center,
-    text: "not supported yet"
+    content: "> Hello, *World!*"
   },
   layout: $layout.fill
 })
