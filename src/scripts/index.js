@@ -3,13 +3,14 @@ import ReactJSBox from 'react-jsbox'
 
 import App from './Components/App'
 import Tab from './Components/Tab'
+
 const { width, height } = $device.info.screen
 
 async function renderRootContainer() {
   return new Promise((resolve, reject) => {
     $ui.render({
       props: {
-        title: 'Class Viewer',
+        title: 'runtime browser',
         debugging: true
       },
       views: [
@@ -37,8 +38,8 @@ async function renderRootContainer() {
               layout(make, view) {
                 make.left.bottom.right.inset(0)
                 make.height.equalTo(50)
-              },
-            },
+              }
+            }
           ],
           layout(make, view) {
             make.edges.equalTo(view.super.safeArea)
@@ -54,8 +55,8 @@ async function renderRootContainer() {
   })
 }
 
-void async function () {
+void (async function() {
   const rootView = await renderRootContainer()
   ReactJSBox.render(<App />, rootView.get('main'))
   ReactJSBox.render(<Tab />, rootView.get('tab'))
-}()
+})()

@@ -6,10 +6,9 @@ const { width } = $device.info.screen
 
 const HLTemplate = $file.read('assets/highlight.html').string
 
-function CodeView({ frame, content }) {
+function CodeView({ frame, content, ...props }) {
   const html = pupa(HLTemplate, { code: content })
-
-  return <web frame={frame} html={html} />
+  return <web frame={frame} html={html} {...props} />
 }
 
 export default observer(CodeView)

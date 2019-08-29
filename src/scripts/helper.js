@@ -34,10 +34,6 @@ export const pupa = (template, data) => {
 }
 
 export const minifyCode = code => {
-  const minifiedCode = code
-    .replace(/\t/g, ' '.repeat(2))
-    .replace(/\s\(0x\w+\)/g, "")
-  return minifiedCode.includes('<NSObject:')
-    ? minifiedCode
-    : minifiedCode.replace(/in NSObject:[\s\S]*/g, '')
+  const minifiedCode = code.replace(/\t/g, ' '.repeat(2)).replace(/\s\(0x\w+\)/g, '')
+  return minifiedCode.includes('<NSObject:') ? minifiedCode : minifiedCode.replace(/in NSObject:[\s\S]*/g, '')
 }
