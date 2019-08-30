@@ -25,10 +25,10 @@ const History = observer(props => {
 })
 
 function App() {
-  const { tabActiveIndex } = store
+  const { selectedIndex } = store
   const frame = $('main').frame
   return (
-    <TabContainer frame={frame} tabActiveIndex={tabActiveIndex}>
+    <TabContainer frame={frame} selectedIndex={selectedIndex}>
       <Home />
       <History />
     </TabContainer>

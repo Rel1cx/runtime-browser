@@ -17,7 +17,7 @@ export default observer(function Tab({ data, activeIndex }) {
       data={tabData}
       events={{
         didSelect(_, { row }) {
-          store.setTabActiveIndex(row)
+          store.setselectedIndex(row)
         }
       }}
     />
@@ -85,10 +85,10 @@ const tabData = [
   }
 ]
 
-export const TabContainer = ({ tabActiveIndex, children, ...props }) => {
+export const TabContainer = ({ selectedIndex, children, ...props }) => {
   if (Array.isArray(children)) {
     return children.map((child, index) => (
-      <view frame={props.frame} hidden={index !== tabActiveIndex}>
+      <view frame={props.frame} hidden={index !== selectedIndex}>
         {child}
       </view>
     ))

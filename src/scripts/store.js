@@ -1,15 +1,19 @@
 import { observable, action, autorun } from 'mobx'
 
 class Store {
-  @observable tabActiveIndex = 0
-  @action.bound
-  setTabActiveIndex(index) {
-    this.tabActiveIndex = index
-  }
-  @observable inputValue = null
-  @observable code = ''
-}
+  @observable selectedIndex = 0
 
-autorun(() => console.log(Store.tabActiveIndex))
+  @observable code = ''
+
+  @action
+  setSelectedIndex(index) {
+    this.selectedIndex = index
+  }
+
+  @action
+  setCode(code) {
+    this.code = code
+  }
+}
 
 export default new Store()
