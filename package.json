@@ -82,7 +82,7 @@
     "mobx-react-lite": "^1.4.1",
     "react": "16.9.0",
     "react-jsbox": "^0.0.52",
-    "use-immer": "^0.3.3"
+    "use-immer": "^0.3.5"
   },
   "staticFiles": {
     "staticPath": [
