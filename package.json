@@ -75,7 +75,7 @@
   },
   "dependencies": {
     "core-js": "3.2.1",
-    "escape-goat": "^2.1.0",
+    "escape-goat": "^3.0.0",
     "htm": "^2.2.1",
     "immer": "^3.2.0",
     "mobx": "^5.13.0",
