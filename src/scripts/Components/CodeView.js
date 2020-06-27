@@ -1,14 +1,11 @@
 import React from 'react'
-import { observer } from 'mobx-react-lite/dist/custom.module'
-import { pupa } from '../helper'
-
-const { width } = $device.info.screen
+import { pupa } from '../lib/pupa'
 
 const HLTemplate = $file.read('assets/highlight.html').string
 
-function CodeView({ frame, content, ...props }) {
-  const html = pupa(HLTemplate, { code: content })
+function CodeView({ frame, content, theme = 'agate', fontSize = 12, fontFamily = 'menlo', ...props }) {
+  const html = pupa(HLTemplate, { code: content, theme, fontSize, fontFamily })
   return <web frame={frame} html={html} {...props} />
 }
 
-export default observer(CodeView)
+export default CodeView

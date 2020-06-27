@@ -1,19 +1,31 @@
-import { observable, action, autorun } from 'mobx'
+import { createStore } from 'use-simple-store'
 
-class Store {
-  @observable selectedIndex = 0
-
-  @observable code = ''
-
-  @action
-  setSelectedIndex(index) {
-    this.selectedIndex = index
-  }
-
-  @action
-  setCode(code) {
-    this.code = code
-  }
+const initialSettings = {
+    commonFontSize: 16,
+    previewFontSize: 12,
+    previewTheme: 'arduino-light',
+    historySort: 0,
+    ignoreMethodsInheritedFromNSObject: true
 }
 
-export default new Store()
+export const globalStore = createStore({
+    selectedIndex: 0
+})
+
+export const settingsStore = createStore($cache.get('settings') || initialSettings)
+
+export const codeStore = createStore({
+    code: ''
+})
+
+export const historyStore = createStore({
+    history: $cache.get('history') || []
+})
+
+settingsStore.subscribe(state => {
+    $cache.set('settings', state)
+})
+
+historyStore.subscribe(state => {
+    $cache.set('history', state.history)
+})
