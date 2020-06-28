@@ -1,3 +1,8 @@
+export const TAB_HEIGHT = 50
+
+export const NSLineBreakByWordWrapping = 0
+export const NSLineBreakByCharWrapping = 1
+
 export const previewThemes = [
     'a11y-dark',
     'a11y-light',

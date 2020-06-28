@@ -4,7 +4,7 @@ import { previewThemes } from '../constants'
 import { noop } from '../helper'
 
 const Settings = props => {
-    const { previewTheme, previewFontSize } = settingsStore.useStore()
+    const settings = settingsStore.useStore()
 
     const actions = {
         preview: [
@@ -22,6 +22,16 @@ const Settings = props => {
                 })
             },
             noop,
+            async () => {
+                $ui.menu({
+                    items: ['单词', '字符'],
+                    handler(_, idx) {
+                        settingsStore.update(state => {
+                            state.previewLineBreakMode = idx
+                        })
+                    },
+                })
+            },
         ],
         misc: [
             () =>
@@ -75,7 +85,7 @@ const Settings = props => {
                                     text: '主题',
                                 },
                                 value: {
-                                    text: previewTheme,
+                                    text: settings.previewTheme,
                                 },
                             },
                             {
@@ -100,7 +110,7 @@ const Settings = props => {
                                             max: 16,
                                             step: 1,
                                             continuous: false,
-                                            value: previewFontSize,
+                                            value: settings.previewFontSize,
                                             tintColor: $color('dark'),
                                         },
                                         layout(make, view) {
@@ -122,7 +132,7 @@ const Settings = props => {
                                     {
                                         type: 'label',
                                         props: {
-                                            text: previewFontSize,
+                                            text: settings.previewFontSize,
                                         },
                                         layout(make, view) {
                                             make.centerY.equalTo(view.super)
@@ -130,6 +140,14 @@ const Settings = props => {
                                         },
                                     },
                                 ],
+                            },
+                            {
+                                setup: {
+                                    text: '换行模式',
+                                },
+                                value: {
+                                    text: ['单词', '字符'][settings.previewLineBreakMode],
+                                },
                             },
                         ],
                     },

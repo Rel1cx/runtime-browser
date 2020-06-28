@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 
 function CodeView({
     frame,
@@ -7,9 +7,10 @@ function CodeView({
     language = 'objectivec',
     fontSize = 12,
     fontFamily = 'iosevka',
+    lineBreakMode = 0,
     ...rest
 }) {
-    const key = $text.SHA1([theme, language, fontSize, fontFamily].join())
+    const key = $text.SHA1([theme, language, fontSize, fontFamily, lineBreakMode].join())
 
     return (
         <code
@@ -17,8 +18,9 @@ function CodeView({
             frame={frame}
             text={content}
             theme={theme}
-            fontSize={fontSize}
             language={language}
+            font={$font(fontFamily, fontSize)}
+            lineBreakMode={lineBreakMode}
             editable={false}
             keys={['']}
             inputAccessoryView={null}
@@ -27,4 +29,4 @@ function CodeView({
     )
 }
 
-export default CodeView
+export default memo(CodeView)

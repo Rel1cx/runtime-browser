@@ -4,6 +4,7 @@ const initialSettings = {
     commonFontSize: 16,
     previewFontSize: 12,
     previewTheme: 'arduino-light',
+    previewLineBreakMode: 0,
     historySort: 0,
     ignoreMethodsInheritedFromNSObject: true,
 }

@@ -4,11 +4,12 @@ import History from './containers/History'
 import Settings from './containers/Settings'
 import Tab from './components/Tab'
 import { globalStore } from './store'
+import { TAB_HEIGHT } from './constants'
 
 function App() {
     const { width, height } = $('root').frame
-    const tabFrame = $rect(0, height - 50, width, 50)
-    const contentFrame = $rect(0, 0, width, height - 50)
+    const tabFrame = $rect(0, height - TAB_HEIGHT, width, TAB_HEIGHT)
+    const contentFrame = $rect(0, 0, width, height - TAB_HEIGHT)
     const selectedIndex = globalStore.useStore(s => s.selectedIndex)
 
     return (

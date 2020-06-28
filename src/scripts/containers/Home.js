@@ -7,8 +7,7 @@ import { codeStore, historyStore, settingsStore } from '../store'
 const Home = props => {
     const { width, height } = props.frame
     const { code } = codeStore.useStore()
-    const previewTheme = settingsStore.useStore(s => s.previewTheme)
-    const previewFontSize = settingsStore.useStore(s => s.previewFontSize)
+    const { previewTheme, previewFontSize, previewLineBreakMode } = settingsStore.useStore()
 
     const onChange = sender => {
         sender.text = sender.text.trim()
@@ -39,6 +38,7 @@ const Home = props => {
                 content={code}
                 theme={previewTheme}
                 fontSize={previewFontSize}
+                lineBreakMode={previewLineBreakMode}
             />
         </view>
     )
