@@ -5,7 +5,6 @@ import App from './App'
 $ui.render({
     props: {
         title: 'runtime browser',
-        debugging: true,
     },
     views: [
         {
