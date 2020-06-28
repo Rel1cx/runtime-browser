@@ -3,6 +3,15 @@ export const TAB_HEIGHT = 50
 export const NSLineBreakByWordWrapping = 0
 export const NSLineBreakByCharWrapping = 1
 
+export const initialSettings = {
+    commonFontSize: 16,
+    previewFontSize: 12,
+    previewTheme: 'arduino-light',
+    previewLineBreakMode: 0,
+    historySort: 0,
+    hideMethodsInheritedFromNSObject: true,
+}
+
 export const previewThemes = [
     'a11y-dark',
     'a11y-light',

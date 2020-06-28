@@ -1,13 +1,5 @@
 import { createStore } from 'use-simple-store'
-
-const initialSettings = {
-    commonFontSize: 16,
-    previewFontSize: 12,
-    previewTheme: 'arduino-light',
-    previewLineBreakMode: 0,
-    historySort: 0,
-    ignoreMethodsInheritedFromNSObject: true,
-}
+import { initialSettings } from './constants'
 
 export const globalStore = createStore({
     selectedIndex: 0,

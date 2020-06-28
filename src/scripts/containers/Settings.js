@@ -1,50 +1,60 @@
-import React from 'react'
+import React, { useRef } from 'react'
+import { useUpdateEffect } from 'react-jsbox'
 import { historyStore, settingsStore } from '../store'
-import { previewThemes } from '../constants'
+import { previewThemes, initialSettings } from '../constants'
 import { noop } from '../helper'
 
+const actions = {
+    preview: [
+        async sender => {
+            const cell = sender.cell($indexPath(0, 0)).get('value')
+            const { title } = await $ui.popover({
+                sourceView: cell,
+                sourceRect: cell.bounds,
+                directions: $popoverDirection.up,
+                size: $size(220, 400),
+                items: previewThemes,
+            })
+            settingsStore.update(state => {
+                state.previewTheme = title
+            })
+        },
+        noop,
+        async () => {
+            $ui.menu({
+                items: ['单词', '字符'],
+                handler(_, idx) {
+                    settingsStore.update(state => {
+                        state.previewLineBreakMode = idx
+                    })
+                },
+            })
+        },
+    ],
+    misc: [
+        () =>
+            historyStore.update(state => {
+                state.history = []
+            }),
+        () => {
+            settingsStore.update(() => initialSettings)
+        },
+    ],
+}
+
 const Settings = props => {
+    const settingsRef = useRef()
     const settings = settingsStore.useStore()
 
-    const actions = {
-        preview: [
-            async sender => {
-                const cell = sender.cell($indexPath(0, 0)).get('value')
-                const { title } = await $ui.popover({
-                    sourceView: cell,
-                    sourceRect: cell.bounds,
-                    directions: $popoverDirection.up,
-                    size: $size(220, 400),
-                    items: previewThemes,
-                })
-                settingsStore.update(state => {
-                    state.previewTheme = title
-                })
-            },
-            noop,
-            async () => {
-                $ui.menu({
-                    items: ['单词', '字符'],
-                    handler(_, idx) {
-                        settingsStore.update(state => {
-                            state.previewLineBreakMode = idx
-                        })
-                    },
-                })
-            },
-        ],
-        misc: [
-            () =>
-                historyStore.update(state => {
-                    state.history = []
-                }),
-        ],
-    }
+    useUpdateEffect(() => {
+        settingsRef.current.cell($indexPath(0, 1)).get('value').text = settings.previewFontSize
+    }, [settings.previewFontSize])
 
     return (
         <view {...props}>
             <list
                 id="settings"
+                ref={settingsRef}
                 frame={props.frame}
                 showsVerticalIndicator={false}
                 template={{
@@ -78,7 +88,7 @@ const Settings = props => {
                 }}
                 data={[
                     {
-                        title: 'Preview',
+                        title: '预览',
                         rows: [
                             {
                                 setup: {
@@ -95,6 +105,7 @@ const Settings = props => {
                                     {
                                         type: 'label',
                                         props: {
+                                            id: 'setup',
                                             text: '字体大小',
                                             textColor: $color('darkGray'),
                                         },
@@ -122,7 +133,6 @@ const Settings = props => {
                                                 settingsStore.update(state => {
                                                     state.previewFontSize = sender.value
                                                 })
-                                                sender.next.text = settingsStore.getState().previewFontSize
                                                 $audio.play({
                                                     id: 1104,
                                                 })
@@ -132,6 +142,7 @@ const Settings = props => {
                                     {
                                         type: 'label',
                                         props: {
+                                            id: 'value',
                                             text: settings.previewFontSize,
                                         },
                                         layout(make, view) {
@@ -152,11 +163,19 @@ const Settings = props => {
                         ],
                     },
                     {
-                        title: 'Misc',
+                        title: '通用',
                         rows: [
                             {
                                 setup: {
                                     text: '清除缓存',
+                                },
+                                value: {
+                                    text: '',
+                                },
+                            },
+                            {
+                                setup: {
+                                    text: '恢复默认设置',
                                 },
                                 value: {
                                     text: '',
