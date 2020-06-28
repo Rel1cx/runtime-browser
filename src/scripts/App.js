@@ -6,30 +6,34 @@ import Tab from './components/Tab'
 import { globalStore } from './store'
 
 function App() {
-  const { width, height } = $('root').frame
-  const tabFrame = $rect(0, height - 50, width, 50)
-  const contentFrame = $rect(0, 0, width, height - 50)
-  const selectedIndex = globalStore.useStore(s => s.selectedIndex)
+    const { width, height } = $('root').frame
+    const tabFrame = $rect(0, height - 50, width, 50)
+    const contentFrame = $rect(0, 0, width, height - 50)
+    const selectedIndex = globalStore.useStore(s => s.selectedIndex)
 
-  return (
-    <>
-      <Home frame={contentFrame} hidden={selectedIndex !== 0} />
-      <History frame={contentFrame} hidden={selectedIndex !== 1} />
-      <Settings frame={contentFrame} hidden={selectedIndex !== 2} />
-      <Tab
-        frame={tabFrame}
-        tabItems={tabItems}
-        selectedIndex={selectedIndex}
-        onSelectedIndexChange={(idx) => globalStore.update(state => {
-          state.selectedIndex = idx
-        })}
-      />
-    </>
-  )
+    return (
+        <>
+            <Home frame={contentFrame} hidden={selectedIndex !== 0} />
+            <History frame={contentFrame} hidden={selectedIndex !== 1} />
+            <Settings frame={contentFrame} hidden={selectedIndex !== 2} />
+            <Tab
+                frame={tabFrame}
+                tabItems={tabItems}
+                selectedIndex={selectedIndex}
+                onSelectedIndexChange={idx =>
+                    globalStore.update(state => {
+                        state.selectedIndex = idx
+                    })
+                }
+            />
+        </>
+    )
 }
 
 const tabItems = [
-  { name: 'Home', icon: '102' }, { name: 'History', icon: '099' }, { name: 'Settings', icon: '002' }
+    { name: 'Home', icon: '102' },
+    { name: 'History', icon: '099' },
+    { name: 'Settings', icon: '002' },
 ]
 
 export default App

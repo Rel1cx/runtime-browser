@@ -86,5 +86,5 @@ export const previewThemes = [
     'vs2015',
     'xcode',
     'xt256',
-    'zenburn'
+    'zenburn',
 ]
