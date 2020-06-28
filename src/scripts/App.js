@@ -34,7 +34,7 @@ function App() {
 const tabItems = [
     { name: 'Home', icon: '102' },
     { name: 'History', icon: '099' },
-    { name: 'Settings', icon: '002' },
+    { name: 'Settings', icon: '002' }
 ]
 
 export default App

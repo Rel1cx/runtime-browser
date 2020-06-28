@@ -11,7 +11,7 @@ function Input({ frame, onChange = () => {} }) {
                 returned: onChange,
                 didBeginEditing(sender) {
                     sender.ocValue().invoke('selectAll')
-                },
+                }
             }}
         />
     )

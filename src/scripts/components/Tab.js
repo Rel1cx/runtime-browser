@@ -8,12 +8,12 @@ export default function Tab({ tabItems, selectedIndex, onSelectedIndexChange = (
                 return {
                     menu_image: {
                         icon: $icon(icon, $color('clear'), $size(72, 72)),
-                        tintColor,
+                        tintColor
                     },
                     menu_label: {
                         text: name,
-                        textColor: tintColor,
-                    },
+                        textColor: tintColor
+                    }
                 }
             }),
         [tabItems, selectedIndex]
@@ -32,7 +32,7 @@ export default function Tab({ tabItems, selectedIndex, onSelectedIndexChange = (
             events={{
                 didSelect(_, { row }) {
                     onSelectedIndexChange(row)
-                },
+                }
             }}
             {...rest}
         />
@@ -45,26 +45,26 @@ const tabTemplate = {
             type: 'image',
             props: {
                 id: 'menu_image',
-                bgcolor: $color('clear'),
+                bgcolor: $color('clear')
             },
             layout(make, view) {
                 make.centerX.equalTo(view.super)
                 make.width.height.equalTo(25)
                 make.top.inset(5)
-            },
+            }
         },
         {
             type: 'label',
             props: {
                 id: 'menu_label',
                 font: $font(10),
-                textColor: $color('lightGray'),
+                textColor: $color('lightGray')
             },
             layout(make, view) {
                 const preView = view.prev
                 make.centerX.equalTo(preView)
                 make.top.equalTo(preView.bottom).offset(3)
-            },
-        },
-    ],
+            }
+        }
+    ]
 }

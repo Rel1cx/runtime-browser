@@ -4,13 +4,13 @@ import App from './App'
 
 $ui.render({
     props: {
-        title: 'runtime browser',
+        title: 'runtime browser'
     },
     views: [
         {
             type: 'view',
             props: {
-                id: 'root',
+                id: 'root'
             },
             layout(make, view) {
                 make.edges.equalTo(view.super.safeArea)
@@ -18,8 +18,8 @@ $ui.render({
             events: {
                 layoutSubviews(sender) {
                     ReactJSBox.render(<App />, sender)
-                },
-            },
-        },
-    ],
+                }
+            }
+        }
+    ]
 })

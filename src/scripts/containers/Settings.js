@@ -1,19 +1,58 @@
 import React, { useRef } from 'react'
-import { useUpdateEffect } from 'react-jsbox'
+import { initialSettings, previewThemes } from '../constants'
 import { historyStore, settingsStore } from '../store'
-import { previewThemes, initialSettings } from '../constants'
-import { noop } from '../helper'
+import { noop, getMethodDescription } from '../helper'
+import { useUpdateEffect } from 'react-jsbox'
 
 const actions = {
     preview: [
         async sender => {
+            const lineBreakMode = settingsStore.getState().previewLineBreakMode
+            const exampleCode = getMethodDescription('EKTheme').slice(0, 400)
             const cell = sender.cell($indexPath(0, 0)).get('value')
-            const { title } = await $ui.popover({
+            const popover = $ui.popover({
                 sourceView: cell,
                 sourceRect: cell.bounds,
-                directions: $popoverDirection.up,
-                size: $size(220, 400),
-                items: previewThemes,
+                directions: $popoverDirection.any,
+                size: $size(320, 520),
+                views: [
+                    {
+                        type: 'list',
+                        props: {
+                            bgcolor: $color('#F4F4F4'),
+                            style: 2,
+                            rowHeight: 220,
+                            data: previewThemes.map(theme => ({
+                                title: theme,
+                                rows: [
+                                    {
+                                        type: 'code',
+                                        props: {
+                                            id: 'code',
+                                            text: exampleCode,
+                                            font: $font('iosevka', 12),
+                                            theme,
+                                            lineBreakMode,
+                                            editable: false,
+                                            language: 'objectivec',
+                                            userInteractionEnabled: false
+                                        },
+                                        layout: $layout.fill
+                                    }
+                                ]
+                            }))
+                        },
+                        layout: $layout.fill,
+                        events: {
+                            didSelect(sender, _, data) {
+                                settingsStore.update(state => {
+                                    state.previewTheme = data.props.theme
+                                })
+                                popover.dismiss()
+                            }
+                        }
+                    }
+                ]
             })
             settingsStore.update(state => {
                 state.previewTheme = title
@@ -27,9 +66,9 @@ const actions = {
                     settingsStore.update(state => {
                         state.previewLineBreakMode = idx
                     })
-                },
+                }
             })
-        },
+        }
     ],
     misc: [
         () =>
@@ -38,8 +77,8 @@ const actions = {
             }),
         () => {
             settingsStore.update(() => initialSettings)
-        },
-    ],
+        }
+    ]
 }
 
 const Settings = props => {
@@ -56,35 +95,34 @@ const Settings = props => {
                 id="settings"
                 ref={settingsRef}
                 frame={props.frame}
-                showsVerticalIndicator={false}
                 template={{
                     props: {
-                        accessoryType: 1,
+                        accessoryType: 1
                     },
                     views: [
                         {
                             type: 'label',
                             props: {
                                 id: 'setup',
-                                textColor: $color('darkGray'),
+                                textColor: $color('darkGray')
                             },
                             layout(make, view) {
                                 make.centerY.equalTo(view.super)
                                 make.left.inset(15)
-                            },
+                            }
                         },
                         {
                             type: 'label',
                             props: {
                                 id: 'value',
-                                textColor: $color('#333'),
+                                textColor: $color('#333')
                             },
                             layout(make, view) {
                                 make.centerY.equalTo(view.super)
                                 make.right.inset(5)
-                            },
-                        },
-                    ],
+                            }
+                        }
+                    ]
                 }}
                 data={[
                     {
@@ -92,11 +130,11 @@ const Settings = props => {
                         rows: [
                             {
                                 setup: {
-                                    text: '主题',
+                                    text: '主题'
                                 },
                                 value: {
-                                    text: settings.previewTheme,
-                                },
+                                    text: settings.previewTheme
+                                }
                             },
                             {
                                 type: 'views',
@@ -107,12 +145,12 @@ const Settings = props => {
                                         props: {
                                             id: 'setup',
                                             text: '字体大小',
-                                            textColor: $color('darkGray'),
+                                            textColor: $color('darkGray')
                                         },
                                         layout(make, view) {
                                             make.centerY.equalTo(view.super)
                                             make.left.inset(15)
-                                        },
+                                        }
                                     },
                                     {
                                         type: 'stepper',
@@ -122,7 +160,7 @@ const Settings = props => {
                                             step: 1,
                                             continuous: false,
                                             value: settings.previewFontSize,
-                                            tintColor: $color('dark'),
+                                            tintColor: $color('dark')
                                         },
                                         layout(make, view) {
                                             make.centerY.equalTo(view.super)
@@ -134,60 +172,60 @@ const Settings = props => {
                                                     state.previewFontSize = sender.value
                                                 })
                                                 $audio.play({
-                                                    id: 1104,
+                                                    id: 1104
                                                 })
-                                            },
-                                        },
+                                            }
+                                        }
                                     },
                                     {
                                         type: 'label',
                                         props: {
                                             id: 'value',
-                                            text: settings.previewFontSize,
+                                            text: settings.previewFontSize
                                         },
                                         layout(make, view) {
                                             make.centerY.equalTo(view.super)
                                             make.right.equalTo(view.prev.left).offset(-10)
-                                        },
-                                    },
-                                ],
+                                        }
+                                    }
+                                ]
                             },
                             {
                                 setup: {
-                                    text: '换行模式',
+                                    text: '换行模式'
                                 },
                                 value: {
-                                    text: ['单词', '字符'][settings.previewLineBreakMode],
-                                },
-                            },
-                        ],
+                                    text: ['单词', '字符'][settings.previewLineBreakMode]
+                                }
+                            }
+                        ]
                     },
                     {
                         title: '通用',
                         rows: [
                             {
                                 setup: {
-                                    text: '清除缓存',
+                                    text: '清除缓存'
                                 },
                                 value: {
-                                    text: '',
-                                },
+                                    text: ''
+                                }
                             },
                             {
                                 setup: {
-                                    text: '恢复默认设置',
+                                    text: '恢复默认设置'
                                 },
                                 value: {
-                                    text: '',
-                                },
-                            },
-                        ],
-                    },
+                                    text: ''
+                                }
+                            }
+                        ]
+                    }
                 ]}
                 events={{
                     didSelect(sender, { row, section }) {
                         actions[Object.keys(actions)[section]][row](sender)
-                    },
+                    }
                 }}
             />
         </view>

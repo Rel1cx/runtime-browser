@@ -6,8 +6,8 @@ const History = props => {
     const { history } = historyStore.useStore()
     const data = history.map(text => ({
         label: {
-            text,
-        },
+            text
+        }
     }))
 
     return (
@@ -24,7 +24,7 @@ const History = props => {
                         globalStore.update(state => {
                             state.selectedIndex = 0
                         })
-                    },
+                    }
                 }}
             />
         </view>
@@ -37,11 +37,11 @@ const listTemplate = {
             type: 'label',
             props: {
                 align: $align.center,
-                font: $font('JetBrains Mono', 16),
+                font: $font('JetBrains Mono', 16)
             },
-            layout: $layout.fill,
-        },
-    ],
+            layout: $layout.fill
+        }
+    ]
 }
 
 export default History
