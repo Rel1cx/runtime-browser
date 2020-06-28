@@ -7,6 +7,7 @@ yarn-debug.log*
 yarn-error.log*
 .DS_Store
 .cache
+src/report.html
 
 # Runtime data
 pids
