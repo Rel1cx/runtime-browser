@@ -4,8 +4,7 @@ import { globalStore, historyStore, codeStore } from '../store'
 
 const History = (props) => {
     const { history } = historyStore.useStore()
-    const classItems = [...history].sort()
-    const data = classItems.map(text => ({
+    const data = history.map(text => ({
         label: {
             text
         }
@@ -17,9 +16,9 @@ const History = (props) => {
             data={data}
             template={listTemplate}
             events={{
-                didSelect: (sender, { row }) => {
+                didSelect(sender, _, data) {
                     codeStore.update(state => {
-                        state.code = getMethodDescription(classItems[row])
+                        state.code = getMethodDescription(data.label.text)
                     })
                     globalStore.update(state => {
                         state.selectedIndex = 0

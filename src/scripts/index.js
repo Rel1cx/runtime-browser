@@ -1,6 +1,5 @@
 import React from 'react'
 import ReactJSBox from 'react-jsbox'
-
 import App from './App'
 
 $ui.render({

@@ -1,11 +1,20 @@
 import React from 'react'
-import { pupa } from '../lib/pupa'
 
-const HLTemplate = $file.read('assets/highlight.html').string
+function CodeView({ frame, content, theme = 'nord', language = 'objectivec', fontSize = 12, fontFamily = 'iosevka', ...props }) {
+  const key = $text.SHA1([theme, language, fontSize, fontFamily].join())
 
-function CodeView({ frame, content, theme = 'agate', fontSize = 12, fontFamily = 'menlo', ...props }) {
-  const html = pupa(HLTemplate, { code: content, theme, fontSize, fontFamily })
-  return <web frame={frame} html={html} {...props} />
+  return <code
+    key={key}
+    frame={frame}
+    text={content}
+    theme={theme}
+    fontSize={fontSize}
+    language={language}
+    editable={false}
+    keys={['']}
+    inputAccessoryView={null}
+    {...props}
+  />
 }
 
 export default CodeView

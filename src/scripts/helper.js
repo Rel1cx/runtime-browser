@@ -5,7 +5,11 @@ export function minifyCode(code) {
 }
 
 export function getMethodDescription(name) {
-  const description = $objc(name).$__methodDescription()
+  const instance = $objc(name)
+  if (!instance.__clsName) {
+    return
+  }
+  const description = instance.$__methodDescription()
   if (!description) {
     return
   }

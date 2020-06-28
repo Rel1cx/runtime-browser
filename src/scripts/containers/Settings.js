@@ -98,6 +98,7 @@ const Settings = (props) => {
                       min: 10,
                       max: 16,
                       step: 1,
+                      continuous: false,
                       value: previewFontSize,
                       tintColor: $color('dark')
                     },

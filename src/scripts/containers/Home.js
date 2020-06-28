@@ -12,16 +12,21 @@ const Home = (props) => {
 
     const onChange = sender => {
         sender.text = sender.text.trim()
-        const description = getMethodDescription(sender.text)
-        if (!description) return
+        const name = sender.text
+        if (!name) {
+            return
+        }
+        const description = getMethodDescription(name)
+        if (!description) {
+            return
+        }
         sender.blur()
         codeStore.update(state => {
             state.code = description
         })
         historyStore.update(draft => {
-            if (!draft.history.some(item => item === sender.text)) {
-                draft.history.unshift(sender.text)
-            }
+            draft.history = draft.history.filter(item => item !== sender.text)
+            draft.history.unshift(sender.text)
         })
     }
 
