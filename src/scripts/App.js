@@ -13,9 +13,9 @@ function App({ width, height }) {
 
     const screens = useMemo(
         () => [
-            <Home frame={contentFrame} />,
-            <History frame={contentFrame} />,
-            <Settings frame={contentFrame} />
+            <Home key="home" frame={contentFrame} />,
+            <History key="history" frame={contentFrame} />,
+            <Settings key="Settings" frame={contentFrame} />
         ],
         [contentFrame]
     )
