@@ -1,5 +1,5 @@
 import React from 'react'
-import ReactJSBox from 'react-jsbox'
+import { render } from 'react-jsbox'
 import App from './App'
 
 $ui.render({
@@ -16,8 +16,9 @@ $ui.render({
                 make.edges.equalTo(view.super.safeArea)
             },
             events: {
-                layoutSubviews(sender) {
-                    ReactJSBox.render(<App />, sender)
+                layoutSubviews(view) {
+                    const { width, height } = view.frame
+                    render(<App width={width} height={height} />, view)
                 }
             }
         }

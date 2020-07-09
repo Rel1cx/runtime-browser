@@ -6,8 +6,7 @@ import Tab from './components/Tab'
 import { globalStore } from './store'
 import { TAB_HEIGHT } from './constants'
 
-function App() {
-    const { width, height } = $('root').frame
+function App({ width, height }) {
     const tabFrame = $rect(0, height - TAB_HEIGHT, width, TAB_HEIGHT)
     const contentFrame = $rect(0, 0, width, height - TAB_HEIGHT)
     const selectedIndex = globalStore.useStore(s => s.selectedIndex)

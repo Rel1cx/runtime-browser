@@ -1,23 +1,19 @@
-import React, { useMemo } from 'react'
+import React from 'react'
 
 export default function Tab({ tabItems, selectedIndex, onSelectedIndexChange = () => {}, ...rest }) {
-    const tabData = useMemo(
-        () =>
-            tabItems.map(({ name, icon }, index) => {
-                const tintColor = $color(selectedIndex === index ? 'tint' : 'lightGray')
-                return {
-                    menu_image: {
-                        icon: $icon(icon, $color('clear'), $size(72, 72)),
-                        tintColor
-                    },
-                    menu_label: {
-                        text: name,
-                        textColor: tintColor
-                    }
-                }
-            }),
-        [tabItems, selectedIndex]
-    )
+    const tabData = tabItems.map(({ name, icon }, index) => {
+        const tintColor = $color(selectedIndex === index ? 'tint' : 'lightGray')
+        return {
+            menu_image: {
+                icon: $icon(icon, $color('clear'), $size(72, 72)),
+                tintColor
+            },
+            menu_label: {
+                text: name,
+                textColor: tintColor
+            }
+        }
+    })
 
     return (
         <matrix

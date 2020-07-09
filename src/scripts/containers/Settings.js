@@ -205,7 +205,7 @@ const Settings = props => {
                         rows: [
                             {
                                 setup: {
-                                    text: '清除缓存'
+                                    text: '清除历史记录'
                                 },
                                 value: {
                                     text: ''
