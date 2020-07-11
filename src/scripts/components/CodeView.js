@@ -10,11 +10,11 @@ function CodeView({
     lineBreakMode = 0,
     ...rest
 }) {
-    // const key = $text.SHA1([theme, language, fontSize, fontFamily, lineBreakMode].join())
+    const key = $text.SHA1([theme, language, fontSize, fontFamily, lineBreakMode].join())
 
     return (
         <code
-            // key={key}
+            key={key}
             frame={frame}
             text={content}
             theme={theme}

@@ -1,6 +1,11 @@
 import React from 'react'
 
-export default function Tab({ tabItems, selectedIndex, onSelectedIndexChange = () => {}, ...rest }) {
+export default function Tab({
+    tabItems,
+    selectedIndex,
+    onSelectedIndexChange = () => {},
+    ...rest
+}) {
     const tabData = tabItems.map(({ name, icon }, index) => {
         const tintColor = $color(selectedIndex === index ? 'tint' : 'lightGray')
         return {
@@ -19,7 +24,7 @@ export default function Tab({ tabItems, selectedIndex, onSelectedIndexChange = (
         <matrix
             id="tab"
             itemHeight={40}
-            columns={3}
+            columns={tabItems.length}
             spacing={0}
             scrollEnabled={false}
             selectable={true}
