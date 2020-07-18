@@ -54,9 +54,6 @@ const actions = {
                     }
                 ]
             })
-            settingsStore.update(state => {
-                state.previewTheme = title
-            })
         },
         noop,
         async () => {
