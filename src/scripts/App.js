@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import React from 'react'
 import Home from './containers/Home'
 import History from './containers/History'
 import Settings from './containers/Settings'
@@ -11,18 +11,11 @@ function App({ width, height }) {
     const contentFrame = $rect(0, 0, width, height - TAB_HEIGHT)
     const selectedIndex = globalStore.useStore(s => s.selectedIndex)
 
-    const screens = useMemo(
-        () => [
-            <Home key="home" frame={contentFrame} />,
-            <History key="history" frame={contentFrame} />,
-            <Settings key="Settings" frame={contentFrame} />
-        ],
-        [contentFrame]
-    )
-
     return (
         <>
-            {screens[selectedIndex]}
+            <Home frame={contentFrame} hidden={selectedIndex !== 0} />
+            <History frame={contentFrame} hidden={selectedIndex !== 1} />
+            <Settings frame={contentFrame} hidden={selectedIndex !== 2} />
             <Tab
                 frame={tabFrame}
                 tabItems={tabItems}

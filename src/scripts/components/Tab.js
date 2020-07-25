@@ -9,11 +9,11 @@ export default function Tab({
     const tabData = tabItems.map(({ name, icon }, index) => {
         const tintColor = $color(selectedIndex === index ? 'tint' : 'lightGray')
         return {
-            menu_image: {
+            item_icon: {
                 icon: $icon(icon, $color('clear'), $size(72, 72)),
                 tintColor
             },
-            menu_label: {
+            item_name: {
                 text: name,
                 textColor: tintColor
             }
@@ -45,7 +45,7 @@ const tabTemplate = {
         {
             type: 'image',
             props: {
-                id: 'menu_image',
+                id: 'item_icon',
                 bgcolor: $color('clear')
             },
             layout(make, view) {
@@ -57,7 +57,7 @@ const tabTemplate = {
         {
             type: 'label',
             props: {
-                id: 'menu_label',
+                id: 'item_name',
                 font: $font(10),
                 textColor: $color('lightGray')
             },
