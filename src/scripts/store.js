@@ -1,24 +1,17 @@
-import { createStore } from 'use-simple-store'
+import { proxy, subscribe } from 'valtio'
 import { initialSettings } from './constants'
 
-export const globalStore = createStore({
-    selectedIndex: 0
-})
-
-export const settingsStore = createStore($cache.get('settings') || initialSettings)
-
-export const codeStore = createStore({
-    code: ''
-})
-
-export const historyStore = createStore({
+export const globalState = proxy({
+    code: '',
+    selectedIndex: 0,
+    settings: $cache.get('settings') || initialSettings,
     history: $cache.get('history') || []
 })
 
-settingsStore.subscribe(state => {
-    $cache.set('settings', state)
+subscribe(globalState.settings, () => {
+    $cache.set('settings', globalState.settings)
 })
 
-historyStore.subscribe(state => {
-    $cache.set('history', state.history)
+subscribe(globalState.history, () => {
+    $cache.set('history', globalState.history)
 })

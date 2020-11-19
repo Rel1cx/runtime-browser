@@ -1,13 +1,14 @@
 import React from 'react'
+import { useProxy } from 'valtio'
 import CodeView from '../components/CodeView'
 import Input from '../components/Input'
 import { getMethodDescription } from '../helper'
-import { codeStore, historyStore, settingsStore } from '../store'
+import { globalState } from '../store'
 
 const Home = props => {
     const { width, height } = props.frame
-    const { code } = codeStore.useStore()
-    const { previewTheme, previewFontSize, previewLineBreakMode } = settingsStore.useStore()
+    const { code, settings, history } = useProxy(globalState)
+    const { previewTheme, previewFontSize, previewLineBreakMode } = settings
 
     const onChange = sender => {
         sender.text = sender.text.trim()
@@ -20,13 +21,9 @@ const Home = props => {
             return
         }
         sender.blur()
-        codeStore.update(state => {
-            state.code = description
-        })
-        historyStore.update(draft => {
-            draft.history = draft.history.filter(item => item !== sender.text)
-            draft.history.unshift(sender.text)
-        })
+        globalState.code = description
+        globalState.history = history.filter(item => item !== sender.text)
+        globalState.history.unshift(sender.text)
     }
 
     return (

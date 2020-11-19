@@ -1,9 +1,10 @@
 import React from 'react'
+import { useProxy } from 'valtio'
+import { globalState } from '../store'
 import { getMethodDescription } from '../helper'
-import { globalStore, historyStore, codeStore } from '../store'
 
 const History = props => {
-    const { history } = historyStore.useStore()
+    const { history } = useProxy(globalState)
     const data = history.map(text => ({
         label: {
             text
@@ -18,12 +19,8 @@ const History = props => {
                 template={listTemplate}
                 events={{
                     didSelect(sender, _, data) {
-                        codeStore.update(state => {
-                            state.code = getMethodDescription(data.label.text)
-                        })
-                        globalStore.update(state => {
-                            state.selectedIndex = 0
-                        })
+                        globalState.code = getMethodDescription(data.label.text)
+                        globalState.selectedIndex = 0
                     }
                 }}
             />

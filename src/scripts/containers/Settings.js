@@ -1,13 +1,14 @@
 import React, { useRef } from 'react'
-import { initialSettings, previewThemes } from '../constants'
-import { historyStore, settingsStore } from '../store'
-import { noop, getMethodDescription } from '../helper'
 import { useUpdateEffect } from 'react-jsbox'
+import { useProxy } from 'valtio'
+import { globalState } from '../store'
+import { initialSettings, previewThemes } from '../constants'
+import { noop, getMethodDescription } from '../helper'
 
 const actions = {
     preview: [
         async sender => {
-            const lineBreakMode = settingsStore.getState().previewLineBreakMode
+            const { settings } = globalState
             const exampleCode = getMethodDescription('EKTheme').slice(0, 400)
             const cell = sender.cell($indexPath(0, 0)).get('value')
             const popover = $ui.popover({
@@ -32,7 +33,7 @@ const actions = {
                                             text: exampleCode,
                                             font: $font('iosevka', 12),
                                             theme,
-                                            lineBreakMode,
+                                            lineBreakMode: settings.previewLineBreakMode,
                                             editable: false,
                                             language: 'objectivec',
                                             userInteractionEnabled: false
@@ -45,9 +46,7 @@ const actions = {
                         layout: $layout.fill,
                         events: {
                             didSelect(sender, _, data) {
-                                settingsStore.update(state => {
-                                    state.previewTheme = data.props.theme
-                                })
+                                globalState.settings.previewTheme = data.props.theme
                                 popover.dismiss()
                             }
                         }
@@ -60,27 +59,17 @@ const actions = {
             $ui.menu({
                 items: ['单词', '字符'],
                 handler(_, idx) {
-                    settingsStore.update(state => {
-                        state.previewLineBreakMode = idx
-                    })
+                    globalState.settings.previewLineBreakMode = idx
                 }
             })
         }
     ],
-    misc: [
-        () =>
-            historyStore.update(state => {
-                state.history = []
-            }),
-        () => {
-            settingsStore.update(() => initialSettings)
-        }
-    ]
+    misc: [() => (globalState.history = []), () => (globalState.settings = initialSettings)]
 }
 
 const Settings = props => {
     const settingsRef = useRef()
-    const settings = settingsStore.useStore()
+    const { settings } = useProxy(globalState)
 
     useUpdateEffect(() => {
         settingsRef.current.cell($indexPath(0, 1)).get('value').text = settings.previewFontSize
@@ -165,9 +154,7 @@ const Settings = props => {
                                         },
                                         events: {
                                             changed(sender) {
-                                                settingsStore.update(state => {
-                                                    state.previewFontSize = sender.value
-                                                })
+                                                globalState.settings.previewFontSize = sender.value
                                                 $audio.play({
                                                     id: 1104
                                                 })
