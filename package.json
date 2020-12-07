@@ -67,7 +67,7 @@
         "rimraf": "^3.0.2"
     },
     "dependencies": {
-        "core-js": "3.7.0",
+        "core-js": "3.8.1",
         "immer": "^8.0.0",
         "react": "17.0.1",
         "react-jsbox": "^1.2.9",
