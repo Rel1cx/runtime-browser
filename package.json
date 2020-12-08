@@ -73,7 +73,7 @@
         "react-jsbox": "^1.2.9",
         "react-jsbox-tab": "^1.0.2",
         "use-immer": "^0.4.2",
-        "valtio": "^0.2.3"
+        "valtio": "^0.4.6"
     },
     "staticFiles": {
         "staticPath": [
