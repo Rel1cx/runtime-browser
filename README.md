@@ -9,21 +9,19 @@
 npm install
 ```
 
-## Usage
-
-### dev
+## dev
 
 ```sh
 npm run dev
 ```
 
-### build
+## build
 
 ```sh
 npm run build
 ```
 
-![](https://i.imgsli.com/images/87bbefbe-1902-4792-98ca-c5a259df5d46.png)
+![](https://i.imgsli.com/images/061b3f34-1894-4b7b-8209-33b7ac85ff0e.png)
 
 ## Author
 
