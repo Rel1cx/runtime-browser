@@ -23,6 +23,8 @@ npm run dev
 npm run build
 ```
 
+![](https://i.imgsli.com/images/87bbefbe-1902-4792-98ca-c5a259df5d46.png)
+
 ## Author
 
 👤 **Eva1ent**
@@ -32,6 +34,3 @@ npm run build
 ## Show your support
 
 Give a ⭐️ if this project helped you!
-
-***
-_This README was generated with ❤️ by [readme-md-generator](https://github.com/kefranabg/readme-md-generator)_
